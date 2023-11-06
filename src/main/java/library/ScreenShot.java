@@ -14,7 +14,7 @@ import com.aventstack.extentreports.Status;
 import com.google.common.io.Files;
 import Reports.ExtentReportsPage;
 
-public class ScreenShot  {
+public class ScreenShot extends ExtentReportsPage  {
     public static void TakeScreenShot( WebDriver driver) {
 
           // TODO Auto-generated method stub

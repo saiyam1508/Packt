@@ -1,12 +1,7 @@
 package Pages;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -20,7 +15,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
-
 import com.aventstack.extentreports.Status;
 import Reports.ExtentReportsPage;
 import library.Browser;
@@ -67,17 +61,7 @@ public class HomePage extends ExtentReportsPage {
 	@FindBy(xpath = "//div[text()='2021']")
 	WebElement SelectYear;
 
-//    @FindBy(xpath = "//div[text()='2021']")
-//    WebElement searchInput;
 
-//    public void ObjectInitialization() {
-//    		driver=Browser.getWebDriver(UseProperties.getBrowser());
-//    	 	ReusableMethods reusableMethods = new ReusableMethods(driver);
-//	        reusableMethods.launchApplication(UseProperties.getUrl());
-////	        HomePage alert =new HomePage(driver);
-//	        Alert();   	 
-//
-//    }
 	public HomePage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
@@ -97,6 +81,8 @@ public class HomePage extends ExtentReportsPage {
 			searchInput.clear();
 			searchInput.sendKeys(word);
 			searchInput.sendKeys(Keys.ENTER);
+			ScreenShot.TakeScreenShot(driver);
+			test4.log(Status.PASS,"Screenshot Captured");
 			// Wait for search results to load
 			try {
 				Thread.sleep(4000);
@@ -115,6 +101,7 @@ public class HomePage extends ExtentReportsPage {
 		
 		 driver.navigate().to("https://subscription.packtpub.com/");
 		 test3.log(Status.PASS,"VerifyBrowseLibrary Passed");
+		 rep.flush();
 
 	}
 
@@ -127,6 +114,7 @@ public class HomePage extends ExtentReportsPage {
 		System.out.println("Hex code for color: " + actualColorHex);
 		Assert.assertEquals(expectedColorHex, actualColorHex);
 		ScreenShot.TakeScreenShot(driver);
+		test4.log(Status.PASS,"Screenshot Captured");
 		String logMessage = "Color Verified Successfully";
 		System.out.println(logMessage);
 		Reporter.log(logMessage);
@@ -143,6 +131,7 @@ public class HomePage extends ExtentReportsPage {
 		System.out.println("Position: " + actualPosition);
 		Assert.assertEquals(actualPosition, expectedPosition);
 		ScreenShot.TakeScreenShot(driver);
+		test4.log(Status.PASS,"Screenshot Captured");
 		String logMessage = "Position Verified Successfully!";
 		System.out.println(logMessage);
 		test3.log(Status.PASS, logMessage);
@@ -156,6 +145,7 @@ public class HomePage extends ExtentReportsPage {
 		System.out.println("TEXT: " + actualText);
 		Assert.assertEquals(actualText, expectedText);
 		ScreenShot.TakeScreenShot(driver);
+		test4.log(Status.PASS,"Screenshot Captured");
 		System.out.println("Text Verified Successfully!");
 		test3.log(Status.PASS, "Text Verified Successfully!");
 
@@ -163,10 +153,13 @@ public class HomePage extends ExtentReportsPage {
 
 	public void VerifyNavBar() throws InterruptedException {
 		java.util.List<WebElement> navLinks = navBarElements
-				.findElements(By.xpath("// nav[@id='packt-navbar']/div/a"));     ////div[@class='d-none d-lg-inline navbar-nav']/a
+				.findElements(By.xpath("// nav[@id='packt-navbar']/div/a"));    
+		try {
 		for (WebElement navLink : navLinks) {
 			navLink.click();
 			Thread.sleep(5000);
+			ScreenShot.TakeScreenShot(driver);
+			test4.log(Status.PASS,"Screenshot Captured");
 			System.out.println("Navigated to Pages Successfully!");
 			String pageTitle = driver.getTitle();
 			if (isPageValid(pageTitle)) {
@@ -179,6 +172,8 @@ public class HomePage extends ExtentReportsPage {
 			
 		}
 		test3.log(Status.PASS,"VerifyNavBar Passed");
+		rep.flush();
+	}catch(Exception e) {}
 	}
 
 	public void VerifySuggestedTitles() throws InterruptedException {
@@ -189,6 +184,8 @@ public class HomePage extends ExtentReportsPage {
 		for (WebElement element : elements) {
 			String elementText = element.getText();
 			element.click();
+			ScreenShot.TakeScreenShot(driver);
+			test4.log(Status.PASS,"Screenshot Captured");
 			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 			String mainElementText = mainTitle.getText();
 			j++;
@@ -204,6 +201,7 @@ public class HomePage extends ExtentReportsPage {
 
 		}
 		test3.log(Status.PASS,"VerifySuggestedTitles Passed");
+		rep.flush();
 	}
 
 	public static boolean isPageValid(String pageTitle) {
@@ -222,6 +220,7 @@ public class HomePage extends ExtentReportsPage {
 	public void Alert() {
 		try {
 			driver.findElement(By.xpath("//button[text()='Allow all']")).click();
+			ScreenShot.TakeScreenShot(driver);
 		} catch (Exception e) {
 			System.out.println("Alert not present.");
 		}

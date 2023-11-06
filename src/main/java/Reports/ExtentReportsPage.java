@@ -7,9 +7,9 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 public class ExtentReportsPage {
     public static ExtentHtmlReporter reporter;
     public static ExtentReports rep;
-    public static ExtentTest test1,test2,test3,test4;
+    public static ExtentTest test1,test2,test3,test4,test5;
 
-    public void extentReport()                     //To create the Extent Report
+    public void extentReport()      //To create the Extent Report
      {
         try
         {
@@ -29,6 +29,7 @@ public class ExtentReportsPage {
           test2=rep.createTest("ReusableMethods");
           test3=rep.createTest("HomePage");
           test4=rep.createTest("ScreenShot");
+          test5=rep.createTest("PacktTest");
 
         }
         catch(Exception e)

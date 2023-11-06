@@ -2,14 +2,16 @@ package TestScript;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
+
+import com.aventstack.extentreports.Status;
+
 import Reports.ExtentReportsPage;
 import library.Browser;
 import library.ReusableMethods;
-import library.ScreenShot;
 import library.UseProperties;
 import Pages.HomePage;
 
-public class PacktTest {
+public class PacktTest extends ExtentReportsPage {
     static WebDriver driver;
     ReusableMethods objRMethod;
     ExtentReportsPage ep=new ExtentReportsPage();
@@ -18,7 +20,7 @@ public class PacktTest {
 //    @BeforeSuite(groups= {"smoke","Regression"})
     @Test(priority = 1,groups= {"smoke","Regression"})
     public void BrowserCall() throws InterruptedException
-    {               
+    {   
         driver=Browser.getWebDriver(UseProperties.getBrowser());
 
     }
@@ -51,6 +53,8 @@ public class PacktTest {
         verify.VerifyColor(); // Assertion on advanceKnowledge
         verify.VerifyPosition(); // Assertion on start free trial
         verify.VerifyText();  // Assertion on start free trial
+        test5.log(Status.PASS,"Position , Color and Text Verified");
+        rep.flush();
         
     }
     
@@ -59,7 +63,8 @@ public class PacktTest {
     {
         HomePage browse=new HomePage(driver);
         browse.VerifyBrowseLibrary();
-       
+        test5.log(Status.PASS,"Verified Browse Library for Year 2021");
+        rep.flush();
         
     }
     
@@ -68,6 +73,8 @@ public class PacktTest {
     {
         HomePage titles=new HomePage(driver);
         titles.VerifySuggestedTitles();
+        test5.log(Status.PASS,"Verified carousel title with main title");
+        rep.flush();
     }
     
     
@@ -77,6 +84,8 @@ public class PacktTest {
     {
     	 HomePage navBar=new HomePage(driver); 
     	 navBar.VerifyNavBar();
+    	 test5.log(Status.PASS,"Verified nav bar elements");
+    	 rep.flush();
     }
 
     @AfterSuite(groups= {"smoke","Regression"})

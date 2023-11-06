@@ -6,7 +6,7 @@
       <class name="TestScript.PacktTest">
         <methods>
           <include name="CloseBrowser"/>
-          <include name="search"/>
+          <include name="VerifyPositioinColorAndText"/>
         </methods>
       </class> <!-- TestScript.PacktTest -->
     </classes>
